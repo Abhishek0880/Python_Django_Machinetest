@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User,Group
 from client.models import Client,Project
 from rest_framework import serializers
+from .models import Project
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -12,14 +13,14 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model=Group
         fields=['url','name']
 
-class ClientSerializers(serializers.ModelSerializer):
+class ClientSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Client
-        fields= '__all__'
-        # fields= ['id','client_name','created_at','username]
+        model = Client
+        fields = ['id', 'client_name', 'created_at', 'created_by', 'updated_at']
 
-class ProjectSerializers(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Project
-        fields= '__all__'
+        model = Project
+        fields = ['id', 'name', 'client', 'created_at', 'created_by']
 
+    
